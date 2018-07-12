@@ -7,11 +7,11 @@ const jwt = require('jsonwebtoken');
 
 router.post('/signup', (req, res) => {
 	// See if email is already in database
-	User.find({email: req.body.email}, function(err, user) {
+	User.findOne({email: req.body.email}, function(err, user) {
 		if(user) {
 		    res.status(401).json({
 		    	error: true,
-		    	message: "Email alredy exists."
+		    	message: "Email already exists."
 		    })
 		} else {
 			// if email is not taken, create user in database
@@ -44,7 +44,7 @@ router.post('/login', (req, res) => {
 	User.findOne({email: req.body.email}, function(err, user) {
     if(user) {
 				// log them in (sign a token)
-				if (user.authenticated) {
+				if (user.authenticated(req.body.password)) {
 					var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {
 						expiresIn: 60 * 60 *24
 					})
@@ -78,7 +78,7 @@ router.post('/me/from/token', (req, res) => {
 				res.status(401).json(err);
 			} else {
 				// Look up user in db
-				User.findbyId(user._id, function(err, user) {
+				User.findById(user._id, function(err, user) {
 					if(err) {
 						res.status(401).json(err);
 					} else {

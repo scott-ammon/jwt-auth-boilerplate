@@ -4,7 +4,7 @@ export const UserProfile = props => {
 	return (
 		<div>
 			<p>Hello, {props.user.name}</p>
-			<a onClick={props.logout}>Logout</a>
+			<button onClick={props.logout}>Log Out</button>
 		</div>
 	)
 }

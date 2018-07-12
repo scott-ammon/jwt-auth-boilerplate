@@ -15,6 +15,11 @@ app.use('/auth', auth);
 
 mongoose.connect('mongodb://localhost/jwtAuth');
 
+// Use this for production
+app.get('*', (req, res) => {
+	res.sendFile(__dirname + "/client/build/index.html");
+});
+
 let port = process.env.PORT || 3001;
 
 let server = app.listen(port, () => {
