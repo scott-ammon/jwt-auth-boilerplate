@@ -3,15 +3,15 @@ const express = require('express');
 const bp = require('body-parser');
 const mongoose = require('mongoose');
 const expressJWT = require('express-jwt');
-const auth = require('./routes/auth');
 
 const app = express();
 
-// Need this line to accept POST data from axios route
+// Need bp.json() to accept POST data from axios route on front
 app.use(bp.json());
 app.use(bp.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/client/build'));
-app.use('/auth', auth);
+app.use('/auth', require('./routes/auth'));
+app.use('/locked', expressJWT({secret: process.env.JWT_SECRET}).unless({method: "POST"}), require('./routes/locked'));
 
 mongoose.connect('mongodb://localhost/jwtAuth');
 

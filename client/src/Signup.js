@@ -7,7 +7,8 @@ class Signup extends Component {
 		this.state = {
 			name: '',
 			email: '',
-			password: ''
+			password: '',
+			response: null
 		}
 		this.handleNameChange = this.handleNameChange.bind(this)
 		this.handleEmailChange = this.handleEmailChange.bind(this)
@@ -40,19 +41,31 @@ class Signup extends Component {
 			email: this.state.email,
 			password: this.state.password
 		}).then(result => {
-			localStorage.setItem('mernToken', result.data.token)
-			this.props.liftToken(result.data)
-		}).catch(err => console.log(err))
+			if(result.data.hasOwnProperty('error')) {
+				this.setState({
+					response: result.data
+				})
+			} else {
+				localStorage.setItem('mernToken', result.data.token)
+				this.props.liftToken(result.data)
+				this.setState({
+					response: null
+				})
+			}
+		})
 	}
 
 	render() {
 		return(
-			<form onSubmit={this.handleSubmit}>
-				Name: <input type='text' value={this.state.name} onChange={this.handleNameChange} /><br />
-				Email: <input type='email' value={this.state.email} onChange={this.handleEmailChange} /><br />
-				Password: <input type='password' value={this.state.password} onChange={this.handlePasswordChange} />
-				<input type="submit" value="Sign up" />
-			</form>
+			<div>
+				<p>{(this.state.response) ? this.state.response.message : ''}</p>
+				<form onSubmit={this.handleSubmit}>
+					Name: <input type='text' value={this.state.name} onChange={this.handleNameChange} /><br />
+					Email: <input type='email' value={this.state.email} onChange={this.handleEmailChange} /><br />
+					Password: <input type='password' value={this.state.password} onChange={this.handlePasswordChange} />
+					<input type="submit" value="Sign up" />
+				</form>
+			</div>
 		)
 	}
 }

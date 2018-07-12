@@ -9,10 +9,11 @@ router.post('/signup', (req, res) => {
 	// See if email is already in database
 	User.findOne({email: req.body.email}, function(err, user) {
 		if(user) {
-		    res.status(401).json({
-		    	error: true,
-		    	message: "Email already exists."
-		    })
+	    res.json({
+					error: true,
+					status: 401,
+					message: 'An account with this email already exists.'
+				});
 		} else {
 			// if email is not taken, create user in database
 			User.create({
@@ -50,14 +51,19 @@ router.post('/login', (req, res) => {
 					})
 					res.json({user, token});
 				} else {
-					res.status(401).json({
+					res.json({
 						error: true,
+						status: 401,
 						message: 'Email or password is incorrect'
 					});
 				}
     } else {
     	// if user isn't in database
-		  res.status(401).json(err);
+		  res.json({
+		  	error: true,
+		  	status: 401,
+		  	message: 'Account not found.'
+		  });
     }
 	});
 });
