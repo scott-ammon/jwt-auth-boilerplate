@@ -46,7 +46,7 @@ class Login extends Component {
   render() {
     return(
       <div>
-      <p>{(this.state.response) ? this.state.response.message : ''}</p>
+        <p>{(this.state.response) ? this.state.response.message : ''}</p>
         <form onSubmit={this.handleSubmit}>
           Email: <input type="email" name="email" value={this.state.email} onChange={this.handleInputChange} /><br />
           Password: <input type="password" name="password" value={this.state.password} onChange={this.handleInputChange} />
