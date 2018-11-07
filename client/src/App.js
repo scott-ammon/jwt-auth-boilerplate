@@ -25,7 +25,6 @@ class App extends Component {
     this.state = {
       lockedResult: ''
     }
-    // this.liftTokenToState = this.liftTokenToState.bind(this)
     this.logout = this.logout.bind(this)
     this.checkForLocalToken = this.checkForLocalToken.bind(this)
     this.handleClick = this.handleClick.bind(this)
