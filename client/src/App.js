@@ -10,6 +10,7 @@ import { liftTokenToStore, resetUser } from './actions/index';
 const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
+    token: state.userReducer.token,
   }
 }
 
@@ -60,7 +61,7 @@ class App extends Component {
 
   handleClick(e) {
     e.preventDefault()
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.state.token;
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.props.token;
     axios.get('/locked/test').then(result => {
       this.setState({
         lockedResult: result.data
