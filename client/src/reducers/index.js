@@ -1,38 +1,41 @@
 import { combineReducers } from "redux";
-import { UPDATE_USER, RESET_USER } from '../actions/index';
+import { RESET_USER, LIFT_TOKEN_TO_STORE } from '../actions/index';
 
 const initialState = {
   token: "",
-  id: null,
-  name: "",
-  email: "",
-  password: "",
+  user: {
+    id: null,
+    name: null,
+    email: null,
+  }
 }
 
-const userReducer = (state = initialState.user, action) => {
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
-		case RESET_USER:
-		var blank = Object.assign({}, state, {
-			token: "",
-	    id: null,
-	    name: "",
-	    email: "",
-	    password: "",
-		});
-		return blank;
-    case UPDATE_USER:
+    case LIFT_TOKEN_TO_STORE:
       if (!action.userData) {
         return state;
       } else {
-        var newObj = Object.assign({}, state, {
+        const stateWithToken = Object.assign({}, state, {
           token: action.userData.token,
-          id: action.userData.user.id,
-          name: action.userData.user.name,
-          email: action.userData.user.email,
-          password: action.userData.user.password,
+          user: {
+            id: action.userData.user._id,
+            name: action.userData.user.name,
+            email: action.userData.user.email,
+          },
         });
-        return newObj;
+        return stateWithToken;
       }
+    case RESET_USER:
+      const clearedState = Object.assign({}, state, {
+        token: "",
+        user: {
+          id: null,
+          name: null,
+          email: null,
+        },
+      });
+		  return clearedState;
     default:
       return state;
   }
