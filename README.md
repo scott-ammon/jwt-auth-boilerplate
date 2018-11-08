@@ -3,8 +3,7 @@
 JSON Web Token authentication boilerplate built on the MERN stack
 
 ### Get Started:
-* Clone this repo, make sure to npm install in both the server and client. 
-<br/>
+* Clone this repo, make sure to npm install in both the server and client.  
 `git clone git@github.com:scott-ammon/jwt-auth-boilerplate.git <directory-name>`
 * Create a .env file in the project directory with a `JWT_SECRET=<YOUR SECRET>`
 * Add a `PORT=<WHATEVER PORT YOU WANT>` to the .env. Alternatively, 3001 will be used.
