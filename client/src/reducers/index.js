@@ -2,7 +2,8 @@ import { combineReducers } from "redux";
 import { RESET_USER, 
          LIFT_TOKEN_TO_STORE, 
          SET_LOGIN_ERROR,
-         SET_SIGNUP_ERROR } from '../actions/index';
+         SET_SIGNUP_ERROR,
+         LOCKED_ROUTE_SUCCESS } from '../actions/index';
 
 const initialState = {
   token: "",
@@ -13,6 +14,7 @@ const initialState = {
   },
   loginError: null,
   signupError: null,
+  lockedRoute: false,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -42,6 +44,7 @@ const userReducer = (state = initialState, action) => {
         },
         loginError: null,
         signupError: null,
+        lockedRoute: false,
       });
       return clearedState;
     case SET_LOGIN_ERROR:
@@ -54,6 +57,11 @@ const userReducer = (state = initialState, action) => {
         signupError: action.error,
       });
       return signupErrorState;
+    case LOCKED_ROUTE_SUCCESS:
+      const lockedRouteState = Object.assign({}, state, {
+        lockedRoute: true,
+      });
+      return lockedRouteState;
     default:
       return state;
   }

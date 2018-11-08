@@ -48,6 +48,15 @@ function *checkToken() {
   }
 }
 
+function *accessLockedRoute(action) {
+  try {
+    yield call(api.accessLockedRoute, action.token)
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+  yield put({ type: "LOCKED_ROUTE_SUCCESS" });
+}
+
 function *logoutUser() {
   localStorage.removeItem('mernToken');
   yield put({ type: "RESET_USER" });
@@ -57,6 +66,7 @@ function *rootSaga() {
   yield takeEvery("CHECK_FOR_LOCAL_TOKEN", checkToken);
   yield takeEvery("REQUEST_SIGNUP", signup);
   yield takeEvery("REQUEST_LOGIN", authorize);
+  yield takeEvery("REQUEST_LOCKED_ROUTE", accessLockedRoute);
   yield takeEvery("REQUEST_LOGOUT", logoutUser);
 }
 

@@ -3,7 +3,7 @@ import axios from 'axios';
 const axiosHelper = (
   {
     url,
-    method = 'GET',
+    method = 'POST',
     data,
   },
 ) => {
@@ -25,7 +25,6 @@ const axiosHelper = (
 export const authMeFromToken = (token) => {
   return axiosHelper({
     url: '/auth/me/from/token',
-    method: 'POST',
     data: {
       token,
     },
@@ -37,7 +36,6 @@ export const authMeFromToken = (token) => {
 export const login = (userData) => {
   return axiosHelper({
     url: '/auth/login',
-    method: 'POST',
     data: {
       email: userData.email,
       password: userData.password,
@@ -50,7 +48,6 @@ export const login = (userData) => {
 export const signup = (userData) => {
   return axiosHelper({
     url: '/auth/signup',
-    method: 'POST',
     data: {
       name: userData.name,
       email: userData.email,
@@ -58,5 +55,15 @@ export const signup = (userData) => {
     },
   }).then(result => {
     return result;
-  })
+  });
+}
+
+export const accessLockedRoute = (token) => {
+  axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+  return axiosHelper({
+    url: '/locked/test',
+    method: 'GET',
+  }).then(result => {
+    return result;
+  });
 }

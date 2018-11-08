@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import axios from 'axios';
 import Login from './Login'
 import Signup from './Signup';
 import { UserProfile } from './UserProfile'
 import { connect } from 'react-redux';
-import { liftTokenToStore, 
-         resetUser, 
-         requestSignup,
+import { requestSignup,
          requestLogin,
          requestLogout,
+         requestLockedRoute,
          checkForLocalToken } from './actions/index';
 
 const mapStateToProps = state => {
@@ -18,62 +16,51 @@ const mapStateToProps = state => {
     token: state.userReducer.token,
     loginError: state.userReducer.loginError,
     signupError: state.userReducer.signupError,
+    lockedRoute: state.userReducer.lockedRoute,
   }
-}
+};
 
 const mapDispatchToProps = {
-  liftTokenToStore,
-  resetUser,
   requestSignup,
   requestLogin,
   requestLogout,
+  requestLockedRoute,
   checkForLocalToken,
-}
+};
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      lockedResult: ''
-    }
-    this.handleClick = this.handleClick.bind(this)
-  }
 
   componentDidMount() {
     this.props.checkForLocalToken();
   }
 
-  handleClick(e) {
-    e.preventDefault()
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.props.token;
-    axios.get('/locked/test').then(result => {
-      this.setState({
-        lockedResult: result.data
-      })
-    })
-  }
-
   render() {
     const user = this.props.user;
+    const locked = this.props.lockedRoute ? <p>You have accessed the locked route</p> : '';
 
     if(user.name) {
       return (
       <div className="App">
-        <UserProfile user={this.props.user} logout={this.props.requestLogout} />
-        <a onClick={this.handleClick}> Test the protected route</a>
-        <p>{this.state.lockedResult}</p>
+        <UserProfile 
+          user={this.props.user} 
+          logout={this.props.requestLogout} 
+        />
+        <button onClick={() => {this.props.requestLockedRoute(this.props.token)}}>
+          Test the protected route
+        </button>
+        {locked}
       </div>
       );
     } else {
       return (
         <div className="App">
-          <Signup error={this.props.signupError}
-                  signup={this.props.requestSignup}
-                  liftToken={this.props.liftTokenToStore} 
+          <Signup 
+            error={this.props.signupError}
+            signup={this.props.requestSignup}
           />
-          <Login error={this.props.loginError} 
-                 login={this.props.requestLogin} 
-                 liftToken={this.props.liftTokenToStore} 
+          <Login 
+            error={this.props.loginError} 
+            login={this.props.requestLogin} 
           />
         </div>
       )
