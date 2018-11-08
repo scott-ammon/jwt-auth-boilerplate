@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Login from './Login'
 import Signup from './Signup';
 import { UserProfile } from './UserProfile'
@@ -58,6 +57,7 @@ class App extends Component {
             error={this.props.signupError}
             signup={this.props.requestSignup}
           />
+          <br />
           <Login 
             error={this.props.loginError} 
             login={this.props.requestLogin} 

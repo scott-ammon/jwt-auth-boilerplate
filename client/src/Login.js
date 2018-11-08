@@ -33,6 +33,7 @@ class Login extends Component {
                value={this.state.password} 
                onChange={this.handleInputChange} 
         />
+        <br />
         <button type="button" 
                 onClick={() => {this.props.login(this.state.email, this.state.password)}}>
           Log In

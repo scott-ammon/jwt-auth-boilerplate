@@ -41,6 +41,7 @@ class Signup extends Component {
                 value={this.state.password} 
                 onChange={this.handleInputChange} 
         />
+        <br />
         <button type="button" 
                 value="Sign up"
                 onClick={() => {this.props.signup(this.state.name, this.state.email, this.state.password)}}>

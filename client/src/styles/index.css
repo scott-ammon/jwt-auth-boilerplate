@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+button {
+  padding: .5rem 1rem;
+  background: none;
+  border-radius: .5rem;
+  border: 1px solid black;
+}
+
+.App {
+  width: 300px;
+  text-align: right;
+}
