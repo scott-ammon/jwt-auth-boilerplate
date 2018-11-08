@@ -5,7 +5,10 @@ import Login from './Login'
 import Signup from './Signup';
 import { UserProfile } from './UserProfile'
 import { connect } from 'react-redux';
-import { liftTokenToStore, resetUser, requestLogin } from './actions/index';
+import { liftTokenToStore, 
+         resetUser, 
+         requestLogin,
+         checkForLocalToken } from './actions/index';
 
 const mapStateToProps = state => {
   return {
@@ -18,7 +21,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   liftTokenToStore,
   resetUser,
-  requestLogin
+  requestLogin,
+  checkForLocalToken,
 }
 
 class App extends Component {
@@ -28,7 +32,6 @@ class App extends Component {
       lockedResult: ''
     }
     this.logout = this.logout.bind(this)
-    this.checkForLocalToken = this.checkForLocalToken.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -37,27 +40,8 @@ class App extends Component {
     this.props.resetUser();
   }
 
-  checkForLocalToken() {
-    // Look in local storage for the token
-    let token = localStorage.getItem('mernToken')
-    if(!token || token === 'undefined') {
-      // There was no token
-      localStorage.removeItem('mernToken')
-      this.props.resetUser();
-    } else {
-      // Token found in localStorage. send back to be verified
-      axios.post('/auth/me/from/token', {
-        token
-      }).then(result => {
-        // Put the token in localStorage
-        localStorage.setItem('mernToken', result.data.token)
-        this.props.liftTokenToStore(result.data);
-      }).catch(err => console.log(err));
-    }
-  }
-
   componentDidMount() {
-    this.checkForLocalToken()
+    this.props.checkForLocalToken();
   }
 
   handleClick(e) {

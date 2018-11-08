@@ -8,7 +8,7 @@ class Signup extends Component {
       name: '',
       email: '',
       password: '',
-      response: null
+      response: null,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -16,10 +16,8 @@ class Signup extends Component {
 
   // Handles changes to name, email & password fields
   handleInputChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
     this.setState({
-      [name]: value
+      [e.target.name]: e.target.value,
     });
   }
 

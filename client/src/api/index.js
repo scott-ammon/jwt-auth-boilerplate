@@ -22,6 +22,18 @@ const axiosHelper = (
     });
 };
 
+export const authMeFromToken = (token) => {
+  return axiosHelper({
+    url: '/auth/me/from/token',
+    method: 'POST',
+    data: {
+      token,
+    },
+  }).then(result => {
+      return result;
+  });
+}
+
 export const login = (userData) => {
   return axiosHelper({
     url: '/auth/login',
@@ -33,4 +45,18 @@ export const login = (userData) => {
   }).then(result => {
       return result;
   });
+}
+
+export const signup = (userData) => {
+  return axiosHelper({
+    url: '/auth/signup',
+    method: 'POST',
+    data: {
+      name: userData.name,
+      email: userData.email,
+      password: userData.password,
+    },
+  }).then(result => {
+    return result;
+  })
 }
