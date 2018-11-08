@@ -1,4 +1,4 @@
-# JWT Auth Boilerplate
+# JWT Auth Boilerplate with React & Redux-Saga
 
 JSON Web Token authentication boilerplate built on the MERN stack
 
