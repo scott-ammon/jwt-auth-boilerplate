@@ -5,7 +5,7 @@ import Login from './Login'
 import Signup from './Signup';
 import { UserProfile } from './UserProfile'
 import { connect } from 'react-redux';
-import { liftTokenToStore, resetUser } from './actions/index';
+import { liftTokenToStore, resetUser, requestLogin } from './actions/index';
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +17,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   liftTokenToStore,
   resetUser,
+  requestLogin
 }
 
 class App extends Component {
@@ -83,7 +84,7 @@ class App extends Component {
       return (
         <div className="App">
           <Signup liftToken={this.props.liftTokenToStore} />
-          <Login liftToken={this.props.liftTokenToStore} />
+          <Login login={this.props.requestLogin} liftToken={this.props.liftTokenToStore} />
         </div>
       )
     }
