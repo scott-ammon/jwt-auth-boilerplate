@@ -4,9 +4,8 @@ import * as api from '../api/index';
 function *authorize(action) {
   try {
     const response = yield call(api.login, action.userData);
-    console.log("response in saga: ", response);
       if(response.data.hasOwnProperty('error')) {
-        console.log("REPLACE THIS WITH AN ACTION TO SET ERROR MESSAGE")
+        yield put({type: "SET_LOGIN_ERROR", error: response.data.message });
       } else {
         localStorage.setItem('mernToken', response.data.token)
         yield put({type: "LIFT_TOKEN_TO_STORE", userData: response.data });

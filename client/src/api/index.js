@@ -33,11 +33,4 @@ export const login = (userData) => {
   }).then(result => {
       return result;
   });
-    // THIS MUST GO IN THE SAGA OR THUNK
-    //   if(result.data.hasOwnProperty('error')) {
-    //     // displatch error action and message
-    //   } else {
-    //     // dispatch success
-    //     localStorage.setItem('mernToken', result.data.token)
-    //     this.props.liftToken(result.data)
 }

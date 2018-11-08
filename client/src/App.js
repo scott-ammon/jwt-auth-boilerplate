@@ -11,6 +11,7 @@ const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
     token: state.userReducer.token,
+    error: state.userReducer.error,
   }
 }
 
@@ -84,7 +85,10 @@ class App extends Component {
       return (
         <div className="App">
           <Signup liftToken={this.props.liftTokenToStore} />
-          <Login login={this.props.requestLogin} liftToken={this.props.liftTokenToStore} />
+          <Login error={this.props.error} 
+                 login={this.props.requestLogin} 
+                 liftToken={this.props.liftTokenToStore} 
+          />
         </div>
       )
     }
