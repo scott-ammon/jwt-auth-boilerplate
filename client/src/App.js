@@ -45,7 +45,7 @@ class App extends Component {
           logout={this.props.requestLogout} 
         />
         <button onClick={() => {this.props.requestLockedRoute(this.props.token)}}>
-          Test the protected route
+          Test the locked route
         </button>
         {locked}
       </div>
