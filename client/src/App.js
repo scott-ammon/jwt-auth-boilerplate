@@ -7,21 +7,26 @@ import { UserProfile } from './UserProfile'
 import { connect } from 'react-redux';
 import { liftTokenToStore, 
          resetUser, 
+         requestSignup,
          requestLogin,
+         requestLogout,
          checkForLocalToken } from './actions/index';
 
 const mapStateToProps = state => {
   return {
     user: state.userReducer.user,
     token: state.userReducer.token,
-    error: state.userReducer.error,
+    loginError: state.userReducer.loginError,
+    signupError: state.userReducer.signupError,
   }
 }
 
 const mapDispatchToProps = {
   liftTokenToStore,
   resetUser,
+  requestSignup,
   requestLogin,
+  requestLogout,
   checkForLocalToken,
 }
 
@@ -31,13 +36,7 @@ class App extends Component {
     this.state = {
       lockedResult: ''
     }
-    this.logout = this.logout.bind(this)
     this.handleClick = this.handleClick.bind(this)
-  }
-
-  logout() {
-    localStorage.removeItem('mernToken')
-    this.props.resetUser();
   }
 
   componentDidMount() {
@@ -60,7 +59,7 @@ class App extends Component {
     if(user.name) {
       return (
       <div className="App">
-        <UserProfile user={this.props.user} logout={this.logout} />
+        <UserProfile user={this.props.user} logout={this.props.requestLogout} />
         <a onClick={this.handleClick}> Test the protected route</a>
         <p>{this.state.lockedResult}</p>
       </div>
@@ -68,8 +67,11 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          <Signup liftToken={this.props.liftTokenToStore} />
-          <Login error={this.props.error} 
+          <Signup error={this.props.signupError}
+                  signup={this.props.requestSignup}
+                  liftToken={this.props.liftTokenToStore} 
+          />
+          <Login error={this.props.loginError} 
                  login={this.props.requestLogin} 
                  liftToken={this.props.liftTokenToStore} 
           />

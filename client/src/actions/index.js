@@ -1,8 +1,10 @@
 export const REQUEST_LOGIN = "REQUEST_LOGIN";
+export const REQUEST_LOGOUT = "REQUEST_LOGOUT";
 export const REQUEST_SIGNUP = "REQUEST_SIGNUP";
 export const LIFT_TOKEN_TO_STORE = "LIFT_TOKEN_TO_STORE";
 export const RESET_USER = "RESET_USER";
-export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR"
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
+export const SET_SIGNUP_ERROR = "SET_SIGNUP_ERROR";
 export const CHECK_FOR_LOCAL_TOKEN = "CHECK_FOR_LOCAL_TOKEN";
 
 export const requestLogin = (email, password) => ({
@@ -11,7 +13,11 @@ export const requestLogin = (email, password) => ({
     email,
     password,
   },
-})
+});
+
+export const requestLogout = () => ({
+  type: REQUEST_LOGOUT,
+});
 
 export const liftTokenToStore = (userData) => ({
   type: LIFT_TOKEN_TO_STORE,
@@ -24,6 +30,11 @@ export const resetUser = () => ({
 
 export const setLoginError = (error) => ({
   type: SET_LOGIN_ERROR,
+  error,
+});
+
+export const setSignupError = (error) => ({
+  type: SET_SIGNUP_ERROR,
   error,
 });
 

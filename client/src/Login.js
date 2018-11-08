@@ -35,7 +35,7 @@ class Login extends Component {
         />
         <button type="button" 
                 onClick={() => {this.props.login(this.state.email, this.state.password)}}>
-        Log In
+          Log In
         </button>
       </form>
     );

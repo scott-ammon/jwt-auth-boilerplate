@@ -1,5 +1,8 @@
 import { combineReducers } from "redux";
-import { RESET_USER, LIFT_TOKEN_TO_STORE, SET_LOGIN_ERROR } from '../actions/index';
+import { RESET_USER, 
+         LIFT_TOKEN_TO_STORE, 
+         SET_LOGIN_ERROR,
+         SET_SIGNUP_ERROR } from '../actions/index';
 
 const initialState = {
   token: "",
@@ -8,7 +11,8 @@ const initialState = {
     name: null,
     email: null,
   },
-  error: null,
+  loginError: null,
+  signupError: null,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -36,14 +40,20 @@ const userReducer = (state = initialState, action) => {
           name: null,
           email: null,
         },
-        error: null,
+        loginError: null,
+        signupError: null,
       });
       return clearedState;
     case SET_LOGIN_ERROR:
-      const errorState = Object.assign({}, state, {
-        error: action.error,
+      const loginErrorState = Object.assign({}, state, {
+        loginError: action.error,
       });
-      return errorState;
+      return loginErrorState;
+    case SET_SIGNUP_ERROR:
+      const signupErrorState = Object.assign({}, state, {
+        signupError: action.error,
+      });
+      return signupErrorState;
     default:
       return state;
   }
