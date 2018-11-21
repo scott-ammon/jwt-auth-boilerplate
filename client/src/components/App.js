@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import { Signup } from './Signup';
 import { Login } from './Login';
 import { UserProfile } from './UserProfile'
-import { connect } from 'react-redux';
+
 import { requestSignup,
          requestLogin,
          requestLogout,
          requestLockedRoute,
          checkForLocalToken,
-         handleInputChange } from './actions/index';
+         handleInputChange } from '../actions/index';
 
 class App extends Component {
-  
+
   componentDidMount() {
     this.props.checkForLocalToken();
   }
