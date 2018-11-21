@@ -3,7 +3,8 @@ import { RESET_USER,
          LIFT_TOKEN_TO_STORE, 
          SET_LOGIN_ERROR,
          SET_SIGNUP_ERROR,
-         LOCKED_ROUTE_SUCCESS } from '../actions/index';
+         LOCKED_ROUTE_SUCCESS, 
+         HANDLE_INPUT_CHANGE } from '../actions/index';
 
 const initialState = {
   token: "",
@@ -15,6 +16,11 @@ const initialState = {
   loginError: null,
   signupError: null,
   lockedRoute: false,
+  signupName: null,
+  signupEmail: null,
+  signupPassword: null,
+  loginEmail: null,
+  loginPassword: null,
 }
 
 const userReducer = (state = initialState, action) => {
@@ -45,6 +51,11 @@ const userReducer = (state = initialState, action) => {
         loginError: null,
         signupError: null,
         lockedRoute: false,
+        signupName: null,
+        signupEmail: null,
+        signupPassword: null,
+        loginEmail: null,
+        loginPassword: null,
       });
       return clearedState;
     case SET_LOGIN_ERROR:
@@ -62,6 +73,11 @@ const userReducer = (state = initialState, action) => {
         lockedRoute: true,
       });
       return lockedRouteState;
+    case HANDLE_INPUT_CHANGE:
+      const inputState = Object.assign({}, state, {
+        [action.syntheticEvent.target.name]: action.syntheticEvent.target.value,
+      });
+      return inputState;
     default:
       return state;
   }

@@ -1,55 +1,35 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Signup extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-    }
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value,
-    });
-  }
-
-  render() {
-    return(
-      <form>
-        <p>{(this.props.error) ? this.props.error : ''}</p>
-        Name: 
-        <input type='text' 
-                name="name" 
-                value={this.state.name} 
-                onChange={this.handleInputChange} 
-              />
-        <br />
-        Email: 
-        <input type='email' 
-                name="email" 
-                value={this.state.email} 
-                onChange={this.handleInputChange} 
-        />
-        <br />
-        Password: 
-        <input type='password' 
-                name="password" 
-                value={this.state.password} 
-                onChange={this.handleInputChange} 
-        />
-        <br />
-        <button type="button" 
-                value="Sign up"
-                onClick={() => {this.props.signup(this.state.name, this.state.email, this.state.password)}}>
-          Sign Up
-        </button>
-      </form>
-    )
-  }
+export const Signup = props => {
+  return(
+    <div>
+      <p>{(props.error) ? props.error : ''}</p>
+      Name: 
+      <input type='text' 
+              name='signupName'
+              value={props.name} 
+              onChange={props.handleInput} 
+            />
+      <br />
+      Email: 
+      <input type='email' 
+              name='signupEmail'
+              value={props.email} 
+              onChange={props.handleInput} 
+      />
+      <br />
+      Password: 
+      <input type='password' 
+              name='signupPassword'
+              value={props.password} 
+              onChange={props.handleInput} 
+      />
+      <br />
+      <button type="button" 
+              value="Sign up"
+              onClick={() => {props.signup(props.name, props.email, props.password)}}>
+        Sign Up
+      </button>
+    </div>
+  )
 }
-
-export default Signup

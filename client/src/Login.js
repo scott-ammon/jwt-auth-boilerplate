@@ -1,46 +1,27 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      email: '',
-      password: '',
-    }
-    this.handleInputChange = this.handleInputChange.bind(this)
-  }
-
-  handleInputChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  }
-
-  render() {
-    return(
-      <form>
-        <p>{(this.props.error) ? this.props.error : ''}</p>
-        Email: 
-        <input type="email" 
-               name="email" 
-               value={this.state.email} 
-               onChange={this.handleInputChange} 
-        />
-        <br />
-        Password: 
-        <input type="password" 
-               name="password" 
-               value={this.state.password} 
-               onChange={this.handleInputChange} 
-        />
-        <br />
-        <button type="button" 
-                onClick={() => {this.props.login(this.state.email, this.state.password)}}>
-          Log In
-        </button>
-      </form>
-    );
-  }
+export const Login = props => {
+  return(
+    <div>
+      <p>{(props.error) ? props.error : ''}</p>
+      Email: 
+      <input type="email" 
+             name="loginEmail" 
+             value={props.email} 
+             onChange={props.handleInput} 
+      />
+      <br />
+      Password: 
+      <input type="password" 
+             name="loginPassword" 
+             value={props.password} 
+             onChange={props.handleInput} 
+      />
+      <br />
+      <button type="button" 
+              onClick={() => {props.login(props.email, props.password)}}>
+        Log In
+      </button>
+    </div>
+  );
 }
-
-export default Login

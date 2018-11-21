@@ -8,6 +8,12 @@ export const SET_SIGNUP_ERROR = "SET_SIGNUP_ERROR";
 export const CHECK_FOR_LOCAL_TOKEN = "CHECK_FOR_LOCAL_TOKEN";
 export const REQUEST_LOCKED_ROUTE = "REQUEST_LOCKED_ROUTE";
 export const LOCKED_ROUTE_SUCCESS = "LOCKED_ROUTE_SUCCESS";
+export const HANDLE_INPUT_CHANGE = "HANDLE_INPUT_CHANGE";
+
+export const handleInputChange = (syntheticEvent) => ({
+  type: HANDLE_INPUT_CHANGE,
+  syntheticEvent,
+});
 
 export const requestLogin = (email, password) => ({
   type: REQUEST_LOGIN,

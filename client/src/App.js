@@ -1,34 +1,17 @@
 import React, { Component } from 'react';
-import Login from './Login'
-import Signup from './Signup';
+import { Signup } from './Signup';
+import { Login } from './Login';
 import { UserProfile } from './UserProfile'
 import { connect } from 'react-redux';
 import { requestSignup,
          requestLogin,
          requestLogout,
          requestLockedRoute,
-         checkForLocalToken } from './actions/index';
-
-const mapStateToProps = state => {
-  return {
-    user: state.userReducer.user,
-    token: state.userReducer.token,
-    loginError: state.userReducer.loginError,
-    signupError: state.userReducer.signupError,
-    lockedRoute: state.userReducer.lockedRoute,
-  }
-};
-
-const mapDispatchToProps = {
-  requestSignup,
-  requestLogin,
-  requestLogout,
-  requestLockedRoute,
-  checkForLocalToken,
-};
+         checkForLocalToken,
+         handleInputChange } from './actions/index';
 
 class App extends Component {
-
+  
   componentDidMount() {
     this.props.checkForLocalToken();
   }
@@ -56,16 +39,47 @@ class App extends Component {
           <Signup 
             error={this.props.signupError}
             signup={this.props.requestSignup}
+            handleInput={this.props.handleInputChange}
+            name={this.props.signupName}
+            email={this.props.signupEmail}
+            password={this.props.signupPassword}
           />
           <br />
           <Login 
             error={this.props.loginError} 
             login={this.props.requestLogin} 
+            handleInput={this.props.handleInputChange}
+            email={this.props.loginEmail}
+            password={this.props.loginPassword}
           />
         </div>
       )
     }
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.userReducer.user,
+    token: state.userReducer.token,
+    loginError: state.userReducer.loginError,
+    signupError: state.userReducer.signupError,
+    lockedRoute: state.userReducer.lockedRoute,
+    signupName: state.userReducer.signupName,
+    signupEmail: state.userReducer.signupEmail,
+    signupPassword: state.userReducer.signupPassword,
+    loginEmail: state.userReducer.loginEmail,
+    loginPassword: state.userReducer.loginPassword
+  }
+};
+
+const mapDispatchToProps = {
+  requestSignup,
+  requestLogin,
+  requestLogout,
+  requestLockedRoute,
+  checkForLocalToken,
+  handleInputChange,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
