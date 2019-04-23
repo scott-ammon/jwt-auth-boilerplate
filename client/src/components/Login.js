@@ -9,7 +9,7 @@ export const Login = props => {
       <input type="email" 
              id="loginEmail"
              name="loginEmail" 
-             value={props.email} 
+             value={props.email || ""} 
              onChange={props.handleInput} 
       />
       <br />
@@ -18,7 +18,7 @@ export const Login = props => {
       <input type="password" 
              id="loginPassword"
              name="loginPassword" 
-             value={props.password} 
+             value={props.password || ""} 
              onChange={props.handleInput} 
       />
       <br />
