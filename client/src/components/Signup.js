@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Signup = props => {
   return(
-    <form>
+    <div>
       <p>{(props.error) ? props.error : ''}</p>
       <label htmlFor="signupName">Name</label>
       <br/>
@@ -36,6 +36,6 @@ export const Signup = props => {
               onClick={() => {props.signup(props.name, props.email, props.password)}}>
         Sign up
       </button>
-    </form>
+    </div>
   )
 }
