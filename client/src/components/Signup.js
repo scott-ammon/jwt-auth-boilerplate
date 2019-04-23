@@ -4,31 +4,37 @@ export const Signup = props => {
   return(
     <div>
       <p>{(props.error) ? props.error : ''}</p>
-      Name: 
-      <input type='text' 
-              name='signupName'
-              value={props.name} 
-              onChange={props.handleInput} 
+      <label htmlFor="signupName">Name</label>
+      <br/>
+      <input  
+             id="signupName"
+             name='signupName'
+             value={props.name || ""} 
+             onChange={props.handleInput} 
             />
       <br />
-      Email: 
+      <label htmlFor="signupEmail">Email</label>
+      <br/>
       <input type='email' 
-              name='signupEmail'
-              value={props.email} 
-              onChange={props.handleInput} 
+             id="signupEmail"
+             name='signupEmail'
+             value={props.email || ""} 
+             onChange={props.handleInput} 
       />
       <br />
-      Password: 
+      <label htmlFor="signupPassword">Password</label>
+      <br/>
       <input type='password' 
-              name='signupPassword'
-              value={props.password} 
-              onChange={props.handleInput} 
+             id="signupPassword"
+             name='signupPassword'
+             value={props.password || ""} 
+             onChange={props.handleInput} 
       />
       <br />
-      <button type="button" 
+      <button type="submit" 
               value="Sign up"
               onClick={() => {props.signup(props.name, props.email, props.password)}}>
-        Sign Up
+        Sign up
       </button>
     </div>
   )

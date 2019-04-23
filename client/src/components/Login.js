@@ -4,23 +4,27 @@ export const Login = props => {
   return(
     <div>
       <p>{(props.error) ? props.error : ''}</p>
-      Email: 
+      <label htmlFor="loginEmail">Email</label>
+      <br/>
       <input type="email" 
+             id="loginEmail"
              name="loginEmail" 
-             value={props.email} 
+             value={props.email || ""} 
              onChange={props.handleInput} 
       />
       <br />
-      Password: 
+      <label htmlFor="loginPassword">Password</label>
+      <br/>
       <input type="password" 
+             id="loginPassword"
              name="loginPassword" 
-             value={props.password} 
+             value={props.password || ""} 
              onChange={props.handleInput} 
       />
       <br />
       <button type="button" 
               onClick={() => {props.login(props.email, props.password)}}>
-        Log In
+        Log in
       </button>
     </div>
   );
