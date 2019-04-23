@@ -5,13 +5,33 @@ body {
 }
 
 button {
-  padding: .5rem 1rem;
-  background: none;
-  border-radius: .5rem;
+  margin: 12px 0;
+  padding: .25rem 1rem;
+  width: 50%;
+  background: black;
+  border-radius: 2px;
   border: 1px solid black;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+ background: none;
+ color: black;
+ transition: .25s ease;
+}
+
+input {
+  margin: 0 0 6px 0;
+  width: 100%;
+}
+
+label {
+  font-size: .7rem;
 }
 
 .App {
-  width: 300px;
-  text-align: right;
+  margin: 0 auto;
+  width: 200px;
 }

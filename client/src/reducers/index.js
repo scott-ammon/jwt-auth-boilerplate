@@ -51,11 +51,11 @@ const userReducer = (state = initialState, action) => {
         loginError: null,
         signupError: null,
         lockedRoute: false,
-        signupName: null,
-        signupEmail: null,
-        signupPassword: null,
-        loginEmail: null,
-        loginPassword: null,
+        signupName: "",
+        signupEmail: "",
+        signupPassword: "",
+        loginEmail: "",
+        loginPassword: "",
       });
       return clearedState;
     case SET_LOGIN_ERROR:
