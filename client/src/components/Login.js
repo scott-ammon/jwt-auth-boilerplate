@@ -3,7 +3,7 @@ import React from 'react';
 export const Login = props => {
   return(
     <div>
-      <p>{(props.error) ? props.error : ''}</p>
+      <p className="error">{(props.error) ? props.error : ''}</p>
       <label htmlFor="loginEmail">Email</label>
       <br/>
       <input type="email" 
