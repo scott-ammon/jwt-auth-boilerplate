@@ -17,7 +17,7 @@ const axiosHelper = (
     })
     .catch((error) => { 
       if(error.response) {
-        return console.log(error.response.data + '\n' + error.response.status); 
+        return error.response.data;
       }
     });
 };

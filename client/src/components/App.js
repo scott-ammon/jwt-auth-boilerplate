@@ -10,7 +10,7 @@ import { requestSignup,
          requestLogout,
          requestLockedRoute,
          checkForLocalToken,
-         handleInputChange } from '../actions/index';
+         handleInputChange } from '../actions/actions';
 
 class App extends Component {
 
