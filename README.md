@@ -20,4 +20,4 @@ JSON Web Token authentication boilerplate built on the MERN stack
 * Redux-saga
 * Node
 
-![mainpage](./client/src/images/mainpage.jpg)
+![mainpage](/client/src/images/mainpage.jpg?raw=true)
