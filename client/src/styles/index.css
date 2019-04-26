@@ -7,10 +7,10 @@ body {
 button {
   margin: 12px 0;
   padding: .25rem 1rem;
-  width: 50%;
-  background: black;
+  width: 100%;
+  background: blue;
   border-radius: 2px;
-  border: 1px solid black;
+  border: 1px solid blue;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -18,7 +18,7 @@ button {
 
 button:hover {
  background: none;
- color: black;
+ color: blue;
  transition: .25s ease;
 }
 
