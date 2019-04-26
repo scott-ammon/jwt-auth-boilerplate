@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Login = props => {
   return(
-    <div>
+    <form>
       <p className="error">{(props.error) ? props.error : ''}</p>
       <label htmlFor="loginEmail">Email</label>
       <br/>
@@ -19,13 +19,14 @@ export const Login = props => {
              id="loginPassword"
              name="loginPassword" 
              value={props.password || ""} 
-             onChange={props.handleInput} 
+             onChange={props.handleInput}
+             autocomplete="off" 
       />
       <br />
       <button type="button" 
               onClick={() => {props.login(props.email, props.password)}}>
         Log in
       </button>
-    </div>
+    </form>
   );
 }

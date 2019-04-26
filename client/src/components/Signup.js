@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Signup = props => {
   return(
-    <div>
+    <form>
       <p className="error">{(props.error) ? props.error : ''}</p>
       <label htmlFor="signupName">Name</label>
       <br/>
@@ -29,13 +29,14 @@ export const Signup = props => {
              name='signupPassword'
              value={props.password || ""} 
              onChange={props.handleInput} 
+             autocomplete="off"
       />
       <br />
-      <button type="submit" 
+      <button type="button"
               value="Sign up"
               onClick={() => {props.signup(props.name, props.email, props.password)}}>
         Sign up
       </button>
-    </div>
+    </form>
   )
 }
