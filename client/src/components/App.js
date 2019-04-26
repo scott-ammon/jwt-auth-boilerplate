@@ -47,6 +47,7 @@ class App extends Component {
             password={this.props.signupPassword}
           />
           <br />
+          <br />
           <Login 
             error={this.props.loginError} 
             login={this.props.requestLogin} 
