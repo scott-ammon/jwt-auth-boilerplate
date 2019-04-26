@@ -25,10 +25,23 @@ router.post('/signup', (req, res) => {
         email: req.body.email,
         password: req.body.password
       }, function(err, user) {
-        // check for any DB errors
+        // map mongoose Validation errors to JSON error object
         if(err) {
-          console.log("Error creating user", err);
-          res.status(401).json(err)
+          let errMessage = "";
+          if(err.errors.name) {
+            errMessage = err.errors.name.message;
+          } else if (err.errors.email) {
+            errMessage = err.errors.email.message;
+          } else if (err.errors.password) {
+            errMessage = err.errors.password.message;
+          } else {
+            errMessage = "Unable to create entry in database.";
+          }
+          res.status(401).json({
+            error: true,
+            status: 401,
+            message: errMessage
+          });
         } else {
           // log the user in (sign a new token)
           var token = jwt.sign(user.toObject(), process.env.JWT_SECRET, {

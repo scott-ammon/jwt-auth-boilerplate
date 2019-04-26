@@ -4,7 +4,7 @@ import { RESET_USER,
          SET_LOGIN_ERROR,
          SET_SIGNUP_ERROR,
          LOCKED_ROUTE_SUCCESS, 
-         HANDLE_INPUT_CHANGE } from '../actions/index';
+         HANDLE_INPUT_CHANGE } from '../actions/actions';
 
 const initialState = {
   token: "",

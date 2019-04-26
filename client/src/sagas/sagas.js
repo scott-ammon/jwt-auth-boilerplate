@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import * as api from '../api/index';
+import * as api from '../api/api';
 
 function *authorize(action) {
   try {
@@ -11,21 +11,21 @@ function *authorize(action) {
       yield put({ type: "LIFT_TOKEN_TO_STORE", userData: response.data });
     }
   } catch (error) {
-    console.log("Error: ", error);
+    console.log(error);
   }
 }
 
 function *signup(action) {
   try {
     const response = yield call(api.signup, action.userData);
-    if(response.data.hasOwnProperty('error')) {
-      yield put({ type: "SET_SIGNUP_ERROR", error: response.data.message });
+    if(response.hasOwnProperty('error')) {
+      yield put({ type: "SET_SIGNUP_ERROR", error: response.message });
     } else {
       localStorage.setItem('mernToken', response.data.token)
       yield put({ type: "LIFT_TOKEN_TO_STORE", userData: response.data });
     }
   } catch (error) {
-    console.log("Error: ", error);
+    console.log(error);
   }
 }
 
@@ -44,7 +44,7 @@ function *checkToken() {
       yield put({ type: "LIFT_TOKEN_TO_STORE", userData: response.data });
     }
   } catch (error) {
-    console.log("Error: ", error);
+    console.log(error);
   }
 }
 
@@ -52,7 +52,7 @@ function *accessLockedRoute(action) {
   try {
     yield call(api.accessLockedRoute, action.token)
   } catch (error) {
-    console.log("Error: ", error);
+    console.log(error);
   }
   yield put({ type: "LOCKED_ROUTE_SUCCESS" });
 }
